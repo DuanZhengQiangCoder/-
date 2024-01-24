@@ -1,0 +1,36 @@
+编写一个算法，判断给定的二叉树是否是二叉排序树
+#include <iostream>
+// 二叉树节点结构
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+bool isBST(TreeNode* root, TreeNode* minNode = nullptr, TreeNode* maxNode = nullptr) {
+    if (root == nullptr) {
+        return true;
+    }
+    // 检查当前节点的值是否在合法范围内
+    if ((minNode != nullptr && root->val <= minNode->val) ||
+        (maxNode != nullptr && root->val >= maxNode->val)) {
+        return false;
+    }
+    // 递归检查左子树和右子树
+    return isBST(root->left, minNode, root) && isBST(root->right, root, maxNode);
+}
+int main() {
+    TreeNode* root = new TreeNode(2);
+    root->left = new TreeNode(1);
+    root->right = new TreeNode(3);
+    if (isBST(root, nullptr, nullptr)) {
+        std::cout << "是二叉排序树" << std::endl;
+    } else {
+        std::cout << "不是二叉排序树" << std::endl;
+    }
+    // 释放内存
+    delete root->left;
+    delete root->right;
+    delete root;
+    return 0;
+}
