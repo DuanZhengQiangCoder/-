@@ -1,0 +1,6 @@
+#define MaxVertexNum 100 //顶点数目的最大值
+typedef struct {
+    int Vex[MaxVertexNum];//顶点表，数据类型是int 类型
+    int Edge[MaxVertexNum][MaxVertexNum];//邻接矩阵，边表
+    int VerNum, arcnum;//图的当前顶点数和弧数
+}MGraph;

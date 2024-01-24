@@ -1,0 +1,18 @@
+bool visited[MAXSIZE]={false};    		//访问标记数组
+void BFS(Graph G,int i,int j,bool &can_reach){	//用can_reach表示是否由路径
+	visited[i]=true;			//置访问标记
+	InitQueue(Q);				//初始化队列
+	Enqueue(Q,i);		  		//入队
+	while(!isEmpty(Q)){			//判断队列是否为空
+	    Dequnue(Q,v);			//出队
+	    if(v==j){				//判断出队(判断队头元素是否是目标顶点) 如果是，则返回ture,表示vi到vj有路径
+		can_reach=true;
+		return;
+	}
+	for(w=FirstNeighbor(G,v);w>=0;w=NextNeighbor(G,v,w)){   //遍历出队的元素的邻接顶点，使得未访问的结点依次入队
+		if(!visited[w]&&!can_reach){
+		    visited[w]=true;
+		    Enqueue(Q,w);
+		}
+	}
+}

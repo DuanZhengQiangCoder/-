@@ -1,0 +1,22 @@
+若一次遍历就能访问到n个顶点和n-1条边，则可断定此图的一棵树
+void DFS(Graph G,int v,int &Vnum,int &Enum,int visited[]){
+	visited[v]=TRUE;Vnum++;       //Vnum是访问到的顶点数，每访问一个，vnum+1
+	int w=v.FirstNeighbor(G,v);   //v的第一个邻接顶点
+	while(w!=-999)		      //表示第一个邻接点不是空
+	    Enum++;                   //enum是邻接表中每个顶点链接的箭头（画图理解）
+	    if(!visited[w])
+		DFS(G,w,Vnum,Enum,visited);//执行DFS算法
+            w=NextNeighbor(G,v,w);
+	}
+}
+
+bool isTree(Graph G)
+	for(i=0;i<G.vexnum;v++){
+	    visited[i]=FAlSE;          //初始化标记数组
+	int Vnum,Enum=0;
+	DFS(G,0,Vnum,Enum,visited);    //默认从v=0开始遍历
+	if(Vnum=G.vexnum&&Enum=2*(G.vexnum-1))
+		return true;           //符合树的条件
+	else
+		return false;	       //不符合树的条件
+}

@@ -1,0 +1,13 @@
+// 邻接表的节点结构
+struct Node {
+    int vertex;      // 顶点数据
+    Node* next;      // 指向下一个节点的指针
+};
+
+// 图的邻接表存储结构
+struct Graph {
+    int numVertices, numEdges;  // 顶点数和边数
+    char VerticesList[MAXV];    // 顶点列表
+    Node* AdjList[MAXV];        // 邻接表的头指针数组（存放的是第一个相邻结点的地址）
+
+};

@@ -1,0 +1,10 @@
+//设ALGraph是图的定义，arcs是邻接矩阵
+void convert(ALGraph &G,int arcs[M][N]){
+   for(i=0;i<n;i++)｛
+	p=(G.Vertex[i]).firstArc;Arc//设图的顶点存在Vertex[]数组中，取每个顶点的第一个指向的结点地址进行遍历
+   while(p!=NULL){
+	arcs[i][p->adjvex]=1;//将邻接矩阵对应的值设为1
+	p=p->next;//遍历下一条边
+	｝
+   ｝
+｝

@@ -1,0 +1,19 @@
+void BFS_MIN_Distance(Graph G,int u){        	//利用BFS算法来求解单源最短路径问题，u表示所求顶点
+     //d[i]表示从u到i结点的最短路径，i表示各个顶点
+     for(i=0;i<G.vexnum;i++){
+		d[i]=∞;			     	//初始化路径长度,默认到每次顶点的距离为∞
+     }
+     visited[u]=true;d[u]=0;                    //将所求顶点置为已访问，设置自己到自己的距离为0
+     Enqueue(Q,u);				     //将访问的所求顶点入队
+     while(!isEmpty(Q)){			     //如果队列不为空
+          Dequeue(Q,u);			     //队头元素出队
+     //此时u是队头元素（不是所求顶点），所以下面的d[u]会跟着改变
+     for(w=FirstNeighbor(G,u);w>=0;w=NextNeighbor(G,u,w)){
+	if(!visited[w]){		     //如果结点未访问
+		visited[w]=true;	     //置结点已访问
+		d[w]=d[u]+1;		     //路径长度+1   ！！！  重点理解该句代码
+		Enqueue(Q,u);		     //使访问的结点入队
+        }
+    }
+}
+

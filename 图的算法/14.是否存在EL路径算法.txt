@@ -1,0 +1,23 @@
+int IsExistEL(MGraph G) {
+    int oddDegreeCount = 0; // 记录度为奇数的顶点个数
+    // 统计度为奇数的顶点个数
+    for (int i = 0; i < G.numVertices; ++i) {
+        int degree = 0;
+        for (int j = 0; j < G.numVertices; ++j) {
+            if (G.Edge[i][j] == 1) {
+                degree++;
+            }
+        }
+        if (degree % 2 != 0) {
+            oddDegreeCount++;
+        }
+    }
+
+    // 判断是否存在EL路径
+    if (oddDegreeCount == 0 || oddDegreeCount == 2) {
+        return 1; // 存在EL路径
+    }
+    else {
+        return 0; // 不存在EL路径
+    }
+}

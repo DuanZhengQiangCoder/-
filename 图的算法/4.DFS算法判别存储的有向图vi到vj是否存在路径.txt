@@ -1,0 +1,13 @@
+bool visited[MAXSIZE]={false};    //访问标记数组（初始化都为false）
+void DFS(Graph G,int i,int j,bool &can_reach){
+//深度优先判断有向图G中顶点vi到顶点vj是否有路径，用can_reach标记(初始can_reach为false)
+	if(i==j){
+	   can_reach=true;
+	   return;		  //i就是j
+	}
+	visited[i]=ture;	  //置访问标记
+	for(w=FirstNeighbor(G,v);w>=0;w=NextNeighbor(G,v,w)){
+		if(!visited[w]&&!can_reach){
+			DFS(G,w,j,can_reach);
+		}
+}

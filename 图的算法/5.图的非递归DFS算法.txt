@@ -1,0 +1,18 @@
+void DFS_Non_RC(Graph &G,int v){
+//从顶点v开始进行深度优先搜索，一次遍历一个连通分量的所有顶点
+	int w;           			//顶点序号
+	initStack(S);       			//初始化辅助栈
+	for(i=0;i<G.vexnum;v++){
+		visited[i]=TRUE;   		//初始化标记数组
+	Push(S,v);visited[v]=TURE; 		//v入栈并置visited[v]
+	while(!isEmpty(S)){
+		k=Pop(S);          		//栈退出一个顶点
+		visit(k);          		//先访问，再将其子节点入栈
+		for(w=FirstNeighbor(G,k);w>=0;w=NextNeighbor(G,k,w))
+						//k所有邻接点
+			if(!visited[w]){ 	//未进过栈的顶点进栈
+			Push(S,w);
+			visited[w]=true;  	//作标记，以免再次入栈
+		}
+	}
+}

@@ -1,0 +1,31 @@
+bool visited[MAX_VERTEX_NUM]；//访问标记数组，MAX_VERTEX_NUM是顶点的数量
+//默认图为邻接表存储
+//BFS算法
+void BFS(Graph G,int v){      //从顶点V出发，V作为起始顶点
+    visit(v);		      //访问初始顶点V
+    visited[v]=TRUE;          //对V做已访问标记，表示V已访问
+    Enqueue(Q,v);             //顶点v入队列Q
+    while(!isEmpty(Q)){	      //如果队列Q为空，isEmpty(Q)返回值为1，取反为1，即表示队列不为空就执行下列语句
+	DeQueue(Q,v);         //顶点v出队列（v表示队头元素）
+	//FirstNeighbor(G,v)表示v的第一个指向的结点，NextNeighbor(G,v,w)表示v连接的结点W的后面一个结点（画图理解）
+               for(w=FirstNeighbor(G,v);w>=0;w=NextNeighbor(G,v,w)){     //检测v的所有邻接点
+		    if(!visited[w]){           //如果w结点未访问，即visited[w]=false,取反为true,即表示w结点未访问，执行if语句
+			visted(w);             //访问顶点w
+			visted[w]=TURE;        //对w做已访问标记
+			EnQuene(Q,w);          //顶点w入队列
+	}
+
+  }
+	    						         
+}
+//用BFS算法遍历图
+void BFSTraverse(Graph G){		//BFS_Traverse表示对图G进行广度优先遍历
+	for(i=0;i<G.vexnum;i++)         //vexnum表示的是图结点的数量
+	     visited[i]=FALSE；         //访问标记数组初始化（初始化都为false，表示都未访问）
+	InitQueue(Q);                   //初始化辅助队列Q
+	for(i=0;i<G.vexnum;i++){	//从0号结点开始遍历
+                if(!visit[i])  {        //对每一个连通分量调用依次BFS
+		     BFS(G,i);
+		}
+    }
+}
