@@ -1,0 +1,22 @@
+//树的后序遍历非递归算法
+void PostOrder2(BiTree T){
+	InitStack(S1);//初始化辅助栈S1
+	InitStack(S2);//初始化栈S2（保存后序遍历结点）
+	BiTree p=T;
+	Push(S1,p);     	//让根结点入栈S1
+	while(!isEmpty(S1)){
+		Pop(S1,p);	//S1栈顶元素出栈
+		Push(S2,p);	//让栈顶元素入S2
+		if(p->lchild!=NUll)
+			Push(S1,p->lchild);
+		if(p->rchild!=NUll)
+			Push(S1,p->rchild);
+	}
+	//当S1为空时，S2从栈顶依次取出结点即为后序遍历
+	while (!s2.empty()) {
+        // 输出节点值
+        cout << s2.top()->val << " ";
+        s2.pop();
+    }
+}
+	

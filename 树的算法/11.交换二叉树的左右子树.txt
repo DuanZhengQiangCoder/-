@@ -1,0 +1,15 @@
+// 交换二叉树的左右子树
+void swapLeftAndRight(TreeNode* T) {
+    if (T == nullptr) {
+        return;
+    }
+
+    // 递归交换左右子树
+    swap(T->left, T->right);
+
+    // 递归处理左子树
+    swapLeftAndRight(T->left);
+
+    // 递归处理右子树
+    swapLeftAndRight(T->right);
+}

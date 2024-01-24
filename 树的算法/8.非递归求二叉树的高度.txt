@@ -1,0 +1,18 @@
+//非递归算法求二叉树的高度
+int getHeight(BiTree T){
+	InitQueue(Q)；
+	Enqueue(Q,T);
+	int height=0;
+	while(!IsEmpty(Q)){
+		int size=Q.size();
+		for(int i=0;i<size;i++){
+			Dequeue(Q,q);    	//q是队头结点
+			if(q->lchild!=NULL)
+				Enqueue(Q,q->lchild);
+			if(q->rchild!=NULL)
+				Enqueue(Q,q->rchild);
+		}
+		height++;
+	}
+	return height;
+}

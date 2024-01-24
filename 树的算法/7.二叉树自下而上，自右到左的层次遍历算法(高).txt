@@ -1,0 +1,18 @@
+//二叉树自下而上，自右到左的层次遍历算法
+void levelOrderBottom(BiTree T){
+	InitStack(S);	//初始化辅助栈(从上到下存的是遍历结果)
+	InitQueue(Q);	//初始化辅助队列
+	Enqueue(Q,T);   //让根结点入队
+	if(!IsEmpty(Q)){
+		Dequeue(Q,p); //队头元素出队
+		Push(p,S)
+		if(p->lchild!=NULL)
+			Enqueue(Q,p->lchild);
+		if(p->rchild!=NULL)
+			Enqueue(Q,p->rchild);
+	}
+	while(!IsEmpty(S)){
+		Pop(S,p);
+		visit(p);
+	}
+}

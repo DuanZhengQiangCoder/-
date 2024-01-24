@@ -1,0 +1,22 @@
+//判断给定的二叉树是否是完全二叉树，利用层次遍历的算法思想求解
+bool isCompleteBinaryTree(BiTree T){
+	InitQueue(Q);
+	EnQueue(Q,T);
+	bool flag=false;   //标志位，true表示遇到了空结点，false表示没有遇到空结点	如果空结点后又遇到了空结点，即该树不是完全二叉树
+	while(!IsEmpty(Q)){
+		DeQueue(Q,q);
+		//如果碰到是空结点
+		if(q==NUll){
+			flag=true;   	//一旦遇到空结点，后面的结点必须走这个分支，否则就不是完全二叉树
+		}
+		//该结点是非空结点
+		else{
+			if(flag){
+				return false;   //该树不是完全二叉树
+			}
+		EnQueue(Q,q->lchild);
+		EnQueue(Q,q->rchild);
+		}
+	}
+	return true;       //该树为完全二叉树
+}

@@ -1,0 +1,17 @@
+int countDoubleBranchNodes(TreeNode* T) {
+    if (T == nullptr) {
+        return 0;  // 空节点返回0
+    }
+
+    // !!递归计算左右子树的双分支结点个数
+    int leftCount = countDoubleBranchNodes(T->left);
+    int rightCount = countDoubleBranchNodes(T->right);
+
+    // 如果当前节点是双分支结点，则加1
+    if (T->left != nullptr && T->right != nullptr) {
+        return leftCount + rightCount + 1;
+    }
+    else {
+        return leftCount + rightCount;
+    }
+}

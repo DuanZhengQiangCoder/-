@@ -1,0 +1,15 @@
+//中序遍历的非递归算法（利用辅助栈实现）
+void InOrder2(BiTree T){
+	InitStack(S);BiTree p=T;
+	while(p||!IsEmpty(S)){
+		if(p){
+			Push(S,p);
+			p=p->lchild;//将左子树所有节点入栈（包括根结点）
+		}
+		else{
+			Pop(S,p);
+			visit(p);访问出栈结点
+			p=p->rchild;//向右子树走，p赋值为当前结点的右孩子
+		}
+	}
+}

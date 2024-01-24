@@ -1,0 +1,45 @@
+// 非递归查找两个节点的最近公共祖先(分别找出p和q的祖先结点，分别存入数组，然后从第一位开始匹配即可)
+int findLowestCommonAncestor(BiTree T, TreeNode* p, TreeNode* q) {
+	if (T == nullptr || p == nullptr || q == nullptr) {
+        	return nullptr;
+    	}
+    	int P[],Q[];//初始化数组，分别存放p和q的祖先结点的值
+    	initStack(nodeStack);//初始化辅助栈
+	initStack(visitedRight);//初始化标记栈，右子树是否已访问
+    	TreeNode* s = T;
+	while(!isEmpty(S1)||s!=NULL){
+		//遍历左子树，将结点和访问标记入栈
+    		while(s!=NULL){
+			Push(nodeStack,s);
+			Push(visitedRight,false);
+			s=s->left;
+		}
+		if(!IsEmpty(nodeStack)){
+        		TreeNode *node=nodeStack.top();
+			bool visited=visitedRight.top();
+			if(visited!=false){
+				//如果结点已经访问果右子树，可以访问当前结点
+					if(node==p)｛
+					将栈中除p以外的元素存入P[]中;
+					}
+					//如果不是p
+					Pop(nodeStack);
+					Pop(visitedRight);
+			}
+			else{
+				//如果结点未访问右子树，标记为已访问，并遍历右子树
+				Pop(visitedRight);
+				Push(visitedRight,true);
+				node=node->right;
+			}
+		}
+	}
+	上述代码对q再次执行，即此时P[]和Q[]存放的是各自全部祖先
+	同时分别遍历两个数组，第一次遇到的值就是p和q的公共祖先
+
+
+
+
+
+
+							

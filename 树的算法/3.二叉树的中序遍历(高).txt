@@ -1,0 +1,7 @@
+void InOrder(BiTree T){
+	if(T!=NULL){
+		InOrder(T->lchild);//递归遍历左子树
+		visit(T);	   //访问根节点
+		InOrder(T->rchild);//递归遍历右子树
+	}
+}

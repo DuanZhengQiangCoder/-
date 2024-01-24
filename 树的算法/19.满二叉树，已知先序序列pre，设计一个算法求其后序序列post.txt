@@ -1,0 +1,28 @@
+std::vector<int> constructPostOrder(const std::vector<int>& preOrder) {
+    int n = preOrder.size();
+    if (n == 0) {
+        return std::vector<int>();
+    }
+
+    std::vector<int> postOrder;
+
+    // 根节点是先序序列的第一个元素
+    int root = preOrder[0];
+
+    // 找到左右子树的分界点
+    int i = 1;
+    while (i < n && preOrder[i] < root) {
+        i++;
+    }
+
+    // 递归处理左子树和右子树
+    std::vector<int> leftPostOrder = constructPostOrder(std::vector<int>(preOrder.begin() + 1, preOrder.begin() + i));
+    std::vector<int> rightPostOrder = constructPostOrder(std::vector<int>(preOrder.begin() + i, preOrder.end()));
+
+    // 合并左右子树的后序序列，并追加根节点
+    postOrder.insert(postOrder.end(), leftPostOrder.begin(), leftPostOrder.end());
+    postOrder.insert(postOrder.end(), rightPostOrder.begin(), rightPostOrder.end());
+    postOrder.push_back(root);
+
+    return postOrder;
+}

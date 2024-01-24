@@ -1,0 +1,15 @@
+void BtreeToE(BTree * root){
+	BtreeToExp(root,1);//根的高度为1
+}
+void BtreeToExp(BTree*root,int deep){
+	if(root==NULL) return;//空结点返回
+	else if(root->left==NULL&&root->right==NULL)//若叶子结点
+		printf("%s",root->data);//输出操作数
+	else 
+		if(deep>1) printf("(");   //若有子表达式则加一层括号
+		BreeToExp(root->left,deep+1);
+		printf("%s",root->data);  //输出操作数
+		BreeToExp(root->right,deep+1);
+		if(deep>1) printf(")");   //若有子表达式则加一层括号
+	}
+}

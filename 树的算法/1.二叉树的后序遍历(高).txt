@@ -1,0 +1,7 @@
+void PostOrder(BiTree T){
+	if(T!=NULL){
+		PostOrderOrder(T->lchild);//递归遍历左子树
+		PostOrderOrder(T->rchild);//递归遍历右子树
+		visit(T);	    	  //访问根节点
+	}
+}

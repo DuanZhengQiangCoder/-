@@ -1,0 +1,58 @@
+//释放以某结点为根的子树空间
+void deleteSubtree(BiTree T) {
+	if(T==NULL){
+		return;
+	}
+	deleteSubtree(T->left);
+	deleteSubtree(T->right);
+	delete root;
+}
+//删除元素值x为根的子树
+BiTree deleteNodesWithValue(BiTree, int x){
+	if(T==NULL){
+		return NULL;
+	}
+	InitQueue(Q);
+	EnQueue(Q,T);
+	while(!IsEmpty(Q)){
+		DeQueue(Q,q);
+		//检查左子树
+		if(q->left!=NULL){
+			if(q->left->data==x){
+				deleteSubtree(q->left);
+				q->left=NULL;
+			}
+		     	else{
+				Enqueue(Q,q->left);
+		        }
+		}
+		//检查右子树
+		if(q->right!=NULL){
+			if(q->right->data==x){
+				deleteSubtree(q->right);
+				q->right==NULL;
+			}
+			else{
+				Enqueue(Q,q->right);
+			}
+		}
+	}
+	检查根结点的值，如果也是x，就需要删除整颗树	
+	if(T->data==x){
+		deleteSubtree(T);
+		return NULL;
+	}
+	return T;
+}
+			
+ 
+
+
+
+
+
+
+
+
+
+

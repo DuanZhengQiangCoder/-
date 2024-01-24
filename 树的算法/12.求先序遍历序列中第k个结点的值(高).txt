@@ -1,0 +1,27 @@
+//查找二叉树先序遍历序列中第k个结点的值（非递归算法）
+int func(BiTree T,int k){
+	InitStack(S);//初始化辅助栈
+	BiTree p=T;//使p指向树的根结点
+	Push(S,p)//让根节点入队
+	int count=1;//此时已访问结点个数
+	while(count!=k&&!IsEmpty(S)){
+		visit(p);	//p表示栈顶元素（不访问也可以，方便理解）
+		if(p->lchild!=NULL){
+			Push(S,p->lchild);
+			count++;
+		}
+		else{
+			Pop(S,p); //出栈
+			if(p->rchild!=NULL){
+				Push(S,p->rchild);
+				count++;
+			}
+		}
+	}
+	if(count!=k){
+		return -999;//表示k不合法
+	}
+	return p->data;
+}
+//王道书上是递归算法
+

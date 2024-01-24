@@ -1,0 +1,17 @@
+bool isBST(sqBiTree& T, int i) {
+    // 如果没有左子节点和右子节点，视为满足条件
+    if (2 * i + 1 >= 100 || 2 * i + 2 >= 100) {
+        return true;
+    }
+
+    // 检查当前节点的值是否在左右子节点的值之间
+    if (T.sqBiNode[i] > T.sqBiNode[2 * i + 1] && T.sqBiNode[i] < T.sqBiNode[2 * i + 2]) {
+        // 递归检查左右子树
+        bool leftTree = isBST(T, 2 * i + 1);
+        bool rightTree = isBST(T, 2 * i + 2);
+        return leftTree && rightTree;
+    }
+    else {
+        return false;
+    }
+}

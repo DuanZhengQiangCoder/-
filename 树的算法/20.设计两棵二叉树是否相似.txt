@@ -1,0 +1,16 @@
+bool isSimilar(TreeNode* root1, TreeNode* root2) {
+    // 如果两个树都为空，它们是相似的
+    if (root1 == nullptr && root2 == nullptr) {
+        return true;
+    }
+
+    // 如果有一个树为空而另一个不为空，它们不相似
+    if (root1 == nullptr || root2 == nullptr) {
+        return false;
+    }
+
+    // 根节点的值相等，并且左右子树分别相似
+    return (root1->data == root2->data) &&
+           isSimilar(root1->left, root2->left) &&
+           isSimilar(root1->right, root2->right);
+}

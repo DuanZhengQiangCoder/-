@@ -1,0 +1,100 @@
+#include <iostream>
+#include <vector>
+
+struct TreeNode {
+    int data;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+struct ListNode {
+    int data;
+    ListNode* next;
+    ListNode(int val) : data(val), next(nullptr) {}
+};
+
+// 中序遍历数组存储的二叉树并转换为二叉链表
+void convertToLinkedList(TreeNode* root, ListNode*& head, ListNode*& tail) {
+    if (root == nullptr) {
+        return;
+    }
+
+    // 遍历左子树
+    convertToLinkedList(root->left, head, tail);
+
+    // 将当前节点转换为链表节点
+    ListNode* newNode = new ListNode(root->data);
+    if (tail == nullptr) {
+        // 如果当前链表为空，设置头指针
+        head = newNode;
+    } else {
+        // 否则连接到链表尾部
+        tail->next = newNode;
+    }
+    // 更新链表尾部指针
+    tail = newNode;
+
+    // 遍历右子树
+    convertToLinkedList(root->right, head, tail);
+}
+
+// 打印二叉链表
+void printLinkedList(ListNode* head) {
+    while (head != nullptr) {
+        std::cout << head->data << " ";
+        head = head->next;
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    // 构造数组存储的二叉树
+    std::vector<int> arrayTree = {1, 2, 3, 4, 5, 6, 7};
+
+    // 将数组转换为二叉树
+    TreeNode* root = nullptr;
+    for (int i = 0; i < arrayTree.size(); ++i) {
+        if (arrayTree[i] != -1) {
+            if (root == nullptr) {
+                root = new TreeNode(arrayTree[i]);
+            } else {
+                // 这里假设数组是按照层序遍历的顺序存储的
+                // 可以根据实际情况调整构建二叉树的逻辑
+                TreeNode* current = new TreeNode(arrayTree[i]);
+                std::queue<TreeNode*> q;
+                q.push(root);
+                while (!q.empty()) {
+                    TreeNode* front = q.front();
+                    q.pop();
+                    if (front->left == nullptr) {
+                        front->left = current;
+                        break;
+                    } else {
+                        q.push(front->left);
+                    }
+                    if (front->right == nullptr) {
+                        front->right = current;
+                        break;
+                    } else {
+                        q.push(front->right);
+                    }
+                }
+            }
+        }
+    }
+
+    // 将二叉树转换为二叉链表
+    ListNode* head = nullptr;
+    ListNode* tail = nullptr;
+    convertToLinkedList(root, head, tail);
+
+    // 打印二叉链表
+    std::cout << "Linked List: ";
+    printLinkedList(head);
+
+    // 释放内存
+    // 这里省略了释放内存的代码，实际应用中需要释放动态分配的内存
+
+    return 0;
+}

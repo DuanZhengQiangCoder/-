@@ -1,0 +1,13 @@
+int calculateDepth(TreeNode* root) {
+    // 如果树为空，深度为0
+    if (root == nullptr) {
+        return 0;
+    }
+
+    // 递归计算左右子树的深度
+    int leftDepth = calculateDepth(root->left);
+    int rightDepth = calculateDepth(root->right);
+
+    // 返回左右子树深度的较大值加上当前节点深度（1）
+    return std::max(leftDepth, rightDepth) + 1;
+}

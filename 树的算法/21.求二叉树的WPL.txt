@@ -1,0 +1,24 @@
+// 递归计算二叉树的 WPL
+int calculateWPL(TreeNode* root, int depth) {
+    if (root == nullptr) {
+        return 0;
+    }
+
+    // 如果是叶子节点，返回路径长度
+    if (root->left == nullptr && root->right == nullptr) {
+        return depth * root->weight;//深度乘结点的权值
+    }
+
+    // 递归计算左右子树的 WPL
+    int leftWPL = calculateWPL(root->left, depth + 1);
+    int rightWPL = calculateWPL(root->right, depth + 1);
+
+    // 返回左右子树的 WPL 之和
+    return leftWPL + rightWPL;
+}
+
+// 计算二叉树的 WPL
+int getWPL(TreeNode* root) {
+    // 初始深度为1
+    return calculateWPL(root, 1);
+}
