@@ -1,0 +1,50 @@
+编写一个递归算法，在一棵有n个结点的、随机建立起来的二叉排序树上查找第k小的元素，并返回指向该结点的指针，要求算法的平均时间复杂度为O()log2n)，二叉排序树的每个结点除data,lchild,rchild等数据成员，增加一个count成员，保存以该结点为根的子树上的结点个数。
+
+
+#include <iostream>
+using namespace std;
+// 定义二叉树结点结构
+struct TreeNode {
+    int data;
+    int count; // 以该结点为根的子树上的结点个数(包括该结点)
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int val) : data(val), count(1), left(nullptr), right(nullptr) {}
+};
+// 查找第k小的元素并返回指针
+TreeNode* FindKthSmallest(TreeNode* root, int k) {
+    if (root == nullptr || k <= 0 || k > root->count) {//保证k值合法
+        return nullptr;
+    }
+    int leftCount = (root->left != nullptr) ? root->left->count : 0;//计算左子树的个数（例如：左子树是m个，则根就是第m+1小元素）
+    if (k == leftCount + 1) {
+        return root;
+    }
+    else if (k <= leftCount) {
+        return FindKthSmallest(root->left, k);
+    }
+    else {
+        return FindKthSmallest(root->right, k - leftCount - 1);
+    }
+}
+int main() {
+    // 创建一个示例二叉排序树
+    TreeNode* root = new TreeNode(10);
+    root->left = new TreeNode(5);
+    root->right = new TreeNode(15);
+    root->left->left = new TreeNode(3);
+    root->left->right = new TreeNode(7);
+    root->right->right = new TreeNode(20);
+    root->count = 6;
+    root->left->count = 3;
+    root->right->count = 2;
+    int k = 3; // 查找第4小的元素
+    TreeNode* result = FindKthSmallest(root, k);
+    if (result != nullptr) {
+        cout << "第 " << k << " 小的元素是: " << result->data << endl;
+    }
+    else {
+        cout << "找不到第 " << k << " 小的元素" << endl;
+    }
+    return 0;
+}

@@ -1,0 +1,55 @@
+//编写一个c++算法，求出指定结点在给定二叉排序树中的层次
+#include iostream
+ 定义二叉树结点结构
+struct TreeNode {
+    int data;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int val)  data(val), left(nullptr), right(nullptr) {}
+};
+
+ 在二叉排序树中查找结点的层次
+int FindNodeLevel(TreeNode root, int target, int level) {
+     如果根结点为空，返回0表示未找到
+    if (root == nullptr) {
+        return 0;
+    }
+
+     如果找到目标结点，返回当前层次
+    if (root-data == target) {
+        return level;
+    }
+
+     递归查找左子树和右子树
+    int leftLevel = FindNodeLevel(root-left, target, level + 1);
+    int rightLevel = FindNodeLevel(root-right, target, level + 1);
+
+     返回左子树和右子树中非零的结果，或者0表示未找到
+    return (leftLevel != 0)  leftLevel  rightLevel;
+}
+
+int main() {
+     创建一个二叉排序树
+    TreeNode root = new TreeNode(10);
+    root-left = new TreeNode(5);
+    root-right = new TreeNode(15);
+    root-left-left = new TreeNode(3);
+    root-left-right = new TreeNode(7);
+    root-right-right = new TreeNode(20);
+
+    int target = 7;   要查找的目标结点
+    int level = 1;   根结点的层次为1
+
+    int result = FindNodeLevel(root, target, level);
+
+    if (result != 0) {
+        stdcout  结点   target   的层次为   result  stdendl;
+    } else {
+        stdcout  未找到结点   target  stdendl;
+    }
+
+    return 0;
+}
+```
+
+这个算法首先定义了一个二叉树结点的结构，然后使用递归来查找目标结点，并返回其层次。在 `main` 函数中，我们创建了一个示例二叉排序树，并查找目标结点的层次。你可以根据需要修改树的结构和目标结点的值。

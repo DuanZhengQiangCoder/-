@@ -1,0 +1,38 @@
+设计一个算法，从大到小输出二叉排序树中所有值不小于k的关键字
+#include <iostream>
+using namespace std;
+// 定义二叉树结点结构
+struct TreeNode {
+    int data;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+// 从大到小输出不小于k的关键字
+void PrintKeysGreaterThanK(TreeNode* root, int k) {
+    if (root == nullptr) {
+        return;
+    }
+    // 遍历右子树(因为要从大到小输出，所以要先遍历右子树)
+    PrintKeysGreaterThanK(root->right, k);
+    // 如果当前节点的值不小于k，则输出
+    if (root->data >= k) {
+        cout << root->data << " ";
+    }
+    // 遍历左子树
+    PrintKeysGreaterThanK(root->left, k);
+}
+int main() {
+    // 创建一个二叉排序树
+    TreeNode* root = new TreeNode(10);
+    root->left = new TreeNode(5);
+    root->right = new TreeNode(15);
+    root->left->left = new TreeNode(3);
+    root->left->right = new TreeNode(7);
+    root->right->right = new TreeNode(20);
+    int k = 8; // 选择k值
+    cout << "大于等于" << k << "的关键字从大到小输出为: ";
+    PrintKeysGreaterThanK(root, k);
+    cout << endl;
+    return 0;
+}

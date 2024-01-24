@@ -1,0 +1,49 @@
+设计一个算法，求出给定二叉排序树中最小和最大的关键字
+
+#include <iostream>
+using namespace std;
+// 定义二叉树结点结构
+struct TreeNode {
+    int data;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+// 查找最小关键字
+int FindMinKey(TreeNode* root) {
+    if (root == nullptr) {
+        return -9999; // 返回一个错误值
+    }
+    while (root->left != nullptr) {
+        root = root->left;//最右下角就是最大值
+    }
+    return root->data;
+}
+// 查找最大关键字
+int FindMaxKey(TreeNode* root) {
+    if (root == nullptr) {
+        return -9999; // 返回一个错误值
+    }
+    while (root->right != nullptr) {
+        root = root->right;
+    }
+    return root->data;//最左下角就是最小值
+}
+int main() {
+    // 创建一个二叉排序树
+    TreeNode* root = new TreeNode(10);
+    root->left = new TreeNode(5);
+    root->right = new TreeNode(15);
+    root->left->left = new TreeNode(3);
+    root->left->right = new TreeNode(7);
+    root->right->right = new TreeNode(20);
+    int minKey = FindMinKey(root);
+    int maxKey = FindMaxKey(root);
+    if (minKey != -1) {
+        cout << "最小关键字为: " << minKey << endl;
+    }
+    if (maxKey != -1) {
+        cout << "最大关键字为: " << maxKey << endl;
+    }
+    return 0;
+}

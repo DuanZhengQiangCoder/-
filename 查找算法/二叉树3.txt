@@ -1,0 +1,54 @@
+算法：判断二叉排序树是否是平衡二叉树
+#include <iostream>
+using namespace std;
+#include <algorithm>
+
+// 定义二叉树结点结构
+struct TreeNode {
+    int data;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+// 计算二叉树的高度
+int CalculateHeight(TreeNode* root) {
+    if (root == nullptr) {
+        return 0;
+    }
+    int leftHeight = CalculateHeight(root->left);
+    int rightHeight = CalculateHeight(root->right);
+    return max(leftHeight, rightHeight) + 1;//max(leftHeight, rightHeight)意思就是取左右子树的最大值
+}
+
+// 判断是否是平衡二叉树
+bool IsBalanced(TreeNode* root) {
+    if (root == nullptr) {
+        return true; // 空树是平衡的
+    }
+    int leftHeight = CalculateHeight(root->left);//左子树的高度
+    int rightHeight = CalculateHeight(root->right);//右子树的高度
+    int heightDiff = abs(leftHeight - rightHeight);//计算高度差
+    if (heightDiff > 1) {
+        return false; // 左右子树高度差大于1，不平衡
+    }
+    // 递归检查左子树和右子树
+    return IsBalanced(root->left) && IsBalanced(root->right);
+}
+
+int main() {
+    // 创建一个示例平衡二叉树
+    TreeNode* root = new TreeNode(10);
+    root->left = new TreeNode(5);
+    root->right = new TreeNode(15);
+    root->left->left = new TreeNode(3);
+    root->left->right = new TreeNode(7);
+    root->right->right = new TreeNode(20);
+    if (IsBalanced(root)) {
+        cout << "这是一个平衡二叉树" << std::endl;
+    }
+    else {
+        cout << "这不是一个平衡二叉树" << std::endl;
+    }
+
+    return 0;
+}
