@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+void shellSort(int arr[],int n) {
+    int x = 0;
+    //n为数组长度
+    // 初始间隔设定为数组长度的一半，然后逐渐减小间隔，gap是增量间隔
+    for (int gap = n / 2; gap > 0; gap /= 2) {
+        // 使用插入排序对每个子序列进行排序（插入排序算法）
+        for (int i = gap; i < n; i++) {
+            int temp = arr[i];//temp是暂存
+            int j;
+            for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {//arr[j - gap]前一个距离增量的值
+                arr[j] = arr[j - gap];
+            }
+            arr[j] = temp;
+        }
+        x++;
+        printf("第%d趟排序后的数组后\n",x);
+        for (int i = 0; i < n; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int arr[] = { 12, 34, 54, 2, 3 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << "原始数组: ";
+    for (int i = 0; i < n;i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    shellSort(arr,n);//调用排序算法
+    cout << "希尔排序后的数组: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    return 0;
+}
